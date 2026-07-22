@@ -1,37 +1,32 @@
 # Poise Pms Back end
 
-A full-stack Project Management System built with **Spring Boot**, **React**, and **MySQL**. This application allows engineering and construction companies to manage projects, customers, architects, contractors, structural engineers, and project managers.
+# POISE PMS v2 - Backend
 
-This project is a modern rebuild of my original Java console application, transforming it into a RESTful web application using Spring Boot and React.
+A RESTful backend API for the POISE Project Management System built with **Java**, **Spring Boot**, and **MySQL**.
+
+This application provides endpoints for managing construction projects and the people involved in them, including architects, customers, contractors, structural engineers, and project managers.
 
 ---
 
 ## Features
 
-- Manage projects
-- Manage architects
-- Manage customers
-- Manage contractors
-- Manage structural engineers
-- Manage project managers
-- Assign projects to each professional
-- View all projects assigned to a specific:
-  - Architect
-  - Customer
-  - Contractor
-  - Structural Engineer
-  - Project Manager
-- Create, Read, Update and Delete (CRUD) operations
 - RESTful API
+- CRUD operations for all entities
+- Project assignment to:
+  - Architects
+  - Customers
+  - Contractors
+  - Structural Engineers
+  - Project Managers
+- Retrieve projects by assigned professional
+- DTO pattern
+- Entity relationships using Spring Data JPA and Hibernate
 - MySQL database integration
-- DTO pattern for data transfer
-- Entity relationships using JPA/Hibernate
+- Exception handling for missing resources
 
 ---
 
-## Technologies Used
-
-### Backend
+## Technologies
 
 - Java
 - Spring Boot
@@ -41,29 +36,57 @@ This project is a modern rebuild of my original Java console application, transf
 - MySQL
 - Maven
 
-### Frontend
+---
 
-- React
-- JavaScript
-- HTML
-- CSS
-- Bootstrap
+## Architecture
 
-### Development Tools
+The application follows a layered architecture:
 
-- IntelliJ IDEA
-- VS Code
-- Git
-- GitHub
-- Postman
+```
+Controller
+     │
+     ▼
+Service
+     │
+     ▼
+Repository
+     │
+     ▼
+MySQL Database
+```
+
+Each layer has a single responsibility:
+
+- **Controllers** handle HTTP requests and responses.
+- **Services** contain the business logic.
+- **Repositories** communicate with the database.
+- **Entities** represent database tables.
+- **DTOs** transfer data between the API and clients.
 
 ---
 
-## Database Design
+## Project Structure
 
-The application uses a relational MySQL database.
+```
+src
+└── main
+    └── java
+        └── com.example.backend
+            ├── data
+            │   ├── entity
+            │   └── repository
+            ├── web
+            │   ├── controller
+            │   ├── DTO
+            │   └── service
+            └── BackEndApplication
+```
 
-Main entities include:
+---
+
+## Database
+
+The application uses MySQL with the following primary entities:
 
 - Project
 - Architect
@@ -72,80 +95,46 @@ Main entities include:
 - Structural Engineer
 - Project Manager
 
-Relationships are managed using JPA annotations such as:
+Relationships are managed using JPA annotations including:
 
 - `@ManyToOne`
 - `@OneToMany`
 
 ---
 
-## Project Structure
-
-```
-src
-├── data
-│   ├── entity
-│   └── repository
-│
-├── web
-│   ├── controller
-│   ├── DTO
-│   └── service
-│
-└── BackEndApplication
-```
-
-The application follows a layered architecture:
-
-```
-React
-    ↓
-REST Controller
-    ↓
-Service
-    ↓
-Repository
-    ↓
-MySQL Database
-```
-
----
-
-## REST API
-
-Example endpoints:
-
-### Architects
-
-```
-GET    /architect
-GET    /architect/{id}
-POST   /architect
-PUT    /architect/{id}
-DELETE /architect/{id}
-```
+## REST API Endpoints
 
 ### Projects
 
-```
-GET    /project
-GET    /project/{id}
-POST   /project
-PUT    /project/{id}
-DELETE /project/{id}
-```
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| GET | `/project` | Get all projects |
+| GET | `/project/{id}` | Get a project by ID |
+| POST | `/project` | Create a project |
+| PUT | `/project/{id}` | Update a project |
+| DELETE | `/project/{id}` | Delete a project |
 
-Additional endpoints include retrieving projects by:
+### Architects
 
-- Architect
-- Customer
-- Contractor
-- Structural Engineer
-- Project Manager
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| GET | `/architect` | Get all architects |
+| GET | `/architect/{id}` | Get architect by ID |
+| POST | `/architect` | Create architect |
+| PUT | `/architect/{id}` | Update architect |
+| DELETE | `/architect/{id}` | Delete architect |
+| GET | `/architect/{id}/projects` | Get projects assigned to an architect |
+
+Similar CRUD endpoints are available for:
+
+- Customers
+- Contractors
+- Structural Engineers
+- Project Managers
 
 ---
 
-## Running the Project
+## Running the Application
 
 ### Clone the repository
 
@@ -155,61 +144,67 @@ git clone https://github.com/Lethabo366/Poised-Pms-V2_Back-End.git
 
 ### Configure the database
 
-Create a MySQL database and update:
-
-```
-application.properties
-```
-
-Example:
+Update your `application.properties` file:
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/poisedpms
 spring.datasource.username=YOUR_USERNAME
 spring.datasource.password=YOUR_PASSWORD
+
+spring.jpa.hibernate.ddl-auto=update
+```
+
+### Build
+
+```bash
+mvn clean install
 ```
 
 ### Run
 
 ```bash
-mvn spring-boot: run
+mvn spring-boot:run
 ```
 
-or run the project directly from IntelliJ IDEA.
+or run `BackEndApplication.java` directly from IntelliJ IDEA.
 
 ---
 
 ## Future Improvements
 
-- Authentication and Authorization (Spring Security + JWT)
-- Validation using Bean Validation
-- Global Exception Handling
+- Spring Security
+- JWT Authentication
+- Global Exception Handling (`@ControllerAdvice`)
+- Request Validation (`@Valid`)
 - Pagination
-- Search and Filtering
-- Docker support
-- Cloud deployment
-- CI/CD using GitHub Actions
-- Unit and Integration Testing
-- API Documentation using Swagger/OpenAPI
+- Sorting
+- Filtering
+- Swagger/OpenAPI Documentation
+- Unit Tests
+- Integration Tests
+- Docker Support
+- CI/CD with GitHub Actions
 
 ---
 
-## What I Learned
+## Skills Demonstrated
 
-This project strengthened my understanding of:
+This project demonstrates knowledge of:
 
-- Spring Boot
-- REST API development
+- Java
 - Object-Oriented Programming
-- Dependency Injection
-- Services and Repositories
-- JPA/Hibernate
-- Entity Relationships
+- Spring Boot
+- REST API Development
+- Spring Data JPA
+- Hibernate
+- MySQL
+- Repository Pattern
+- Service Layer Architecture
 - DTO Mapping
-- Error Handling
-- CRUD operations
-- React communicating with a Spring Boot backend
-- Git and GitHub workflows
+- Dependency Injection
+- Entity Relationships
+- Exception Handling
+- Git & GitHub
 
 ---
 
@@ -217,14 +212,11 @@ This project strengthened my understanding of:
 
 **Lethabo Kaphioa**
 
-GitHub:
-https://github.com/Lethabo366
-
-LinkedIn:
-L
+GitHub: https://github.com/Lethabo366
 
 ---
 
 ## License
 
 This project is intended for educational and portfolio purposes.
+
