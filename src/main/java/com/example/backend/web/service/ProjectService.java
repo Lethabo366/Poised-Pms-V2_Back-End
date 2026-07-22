@@ -118,7 +118,7 @@ public class ProjectService {
                 , projectEntity.getStructuralEngineer().getStructEngineerId(), projectEntity.getStructuralEngineer().getName(), projectEntity.getStructuralEngineer().getSurname()
                 , projectEntity.getCustomer().getCustomerId(), projectEntity.getCustomer().getName(), projectEntity.getCustomer().getSurname()
                 , projectEntity.getContractor().getContractorId(), projectEntity.getContractor().getName(), projectEntity.getContractor().getSurname()
-                , projectEntity.getProjectManager().getProjManagerId(), projectEntity.getProjectManager().getName(), projectEntity.getProjectManager().getSurname()
+                , projectEntity.getProjectManager().getProjectManagerId(), projectEntity.getProjectManager().getName(), projectEntity.getProjectManager().getSurname()
                 , projectEntity.getFinalized()
         );
     }

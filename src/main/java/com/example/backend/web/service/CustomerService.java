@@ -20,7 +20,7 @@ public class CustomerService {
     public List<CustomerDTO> getAllCustomers(){
         List<CustomerEntity> entities = this.customerRepository.findAll();
         List<CustomerDTO> customerDTOS = new ArrayList<>(entities.size());
-        entities.forEach(e -> customerDTOS.add(getCustomerDTOFromEntity(e)));
+        entities.forEach(entity -> customerDTOS.add(getCustomerDTOFromEntity(entity)));
         return customerDTOS;
     }
 

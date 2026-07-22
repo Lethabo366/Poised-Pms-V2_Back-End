@@ -12,55 +12,55 @@ import java.util.Optional;
 @Service
 public class StructuralEngineerService {
 
-    private final StructuralEngineerRepository structEngineerRepository;
+    private final StructuralEngineerRepository structuralEngineerRepository;
 
-    public StructuralEngineerService(StructuralEngineerRepository structEngineerRepository) {
-        this.structEngineerRepository = structEngineerRepository;
+    public StructuralEngineerService(StructuralEngineerRepository structuralEngineerRepository) {
+        this.structuralEngineerRepository = structuralEngineerRepository;
     }
 
-    public List<StructuralEngineerDTO> getAllStructEngineers() {
-        List<StructuralEngineerEntity> entities = this.structEngineerRepository.findAll();
-        List<StructuralEngineerDTO> structEngineerDTOS = new ArrayList<>(entities.size());
-        entities.forEach(e -> structEngineerDTOS.add(getStructEngineerDTOFromEntity(e)));
-        return structEngineerDTOS;
+    public List<StructuralEngineerDTO> getAllStructuralEngineers() {
+        List<StructuralEngineerEntity> entities = this.structuralEngineerRepository.findAll();
+        List<StructuralEngineerDTO> structuralEngineerDTOS = new ArrayList<>(entities.size());
+        entities.forEach(e -> structuralEngineerDTOS.add(getStructuralEngineerDTOFromEntity(e)));
+        return structuralEngineerDTOS;
     }
 
-    public StructuralEngineerDTO getStructEngineerById(int id) {
-        Optional<StructuralEngineerEntity> entity = this.structEngineerRepository.findById(id);
+    public StructuralEngineerDTO getStructuralEngineerById(int id) {
+        Optional<StructuralEngineerEntity> entity = this.structuralEngineerRepository.findById(id);
         if (entity.isEmpty()) {
             throw new RuntimeException("Structural Engineer Not Found!");
         } else {
-            return this.getStructEngineerDTOFromEntity(entity.get());
+            return this.getStructuralEngineerDTOFromEntity(entity.get());
         }
     }
 
-    public StructuralEngineerDTO addStructEngineer(StructuralEngineerDTO structEngineerDTO) {
-        StructuralEngineerEntity entity = this.getStructEngineerEntityFromStructEngineerDTO(structEngineerDTO);
-        entity = this.structEngineerRepository.save(entity);
-        return this.getStructEngineerDTOFromEntity(entity);
+    public StructuralEngineerDTO addStructuralEngineer(StructuralEngineerDTO structuralEngineerDTO) {
+        StructuralEngineerEntity entity = this.getStructuralEngineerEntityFromStructuralEngineerDTO(structuralEngineerDTO);
+        entity = this.structuralEngineerRepository.save(entity);
+        return this.getStructuralEngineerDTOFromEntity(entity);
     }
 
-    public StructuralEngineerDTO updateStructEngineer(StructuralEngineerDTO structEngineerDTO) {
-        this.structEngineerRepository.findById(structEngineerDTO.getStructEngineerId()).orElseThrow(() -> new RuntimeException("Structural Engineer Not Found!"));
-        StructuralEngineerEntity entity = this.getStructEngineerEntityFromStructEngineerDTO(structEngineerDTO);
-        entity = this.structEngineerRepository.save(entity);
-        return this.getStructEngineerDTOFromEntity(entity);
+    public StructuralEngineerDTO updateStructuralEngineer(StructuralEngineerDTO structuralEngineerDTO) {
+        this.structuralEngineerRepository.findById(structuralEngineerDTO.getStructEngineerId()).orElseThrow(() -> new RuntimeException("Structural Engineer Not Found!"));
+        StructuralEngineerEntity entity = this.getStructuralEngineerEntityFromStructuralEngineerDTO(structuralEngineerDTO);
+        entity = this.structuralEngineerRepository.save(entity);
+        return this.getStructuralEngineerDTOFromEntity(entity);
     }
 
 
-    public void deleteStructEngineerById(int id) {
-        this.structEngineerRepository.deleteById(id);
+    public void deleteStructuralEngineerById(int id) {
+        this.structuralEngineerRepository.deleteById(id);
     }
 
-    private StructuralEngineerDTO getStructEngineerDTOFromEntity(StructuralEngineerEntity structEngineerEntity) {
-        return new StructuralEngineerDTO(structEngineerEntity.getStructEngineerId(), structEngineerEntity.getSurname(), structEngineerEntity.getName(),
-                structEngineerEntity.getTelephoneNumber(), structEngineerEntity.getEmailAddress(), structEngineerEntity.getPhysicalAddress());
+    private StructuralEngineerDTO getStructuralEngineerDTOFromEntity(StructuralEngineerEntity structuralEngineerEntity) {
+        return new StructuralEngineerDTO(structuralEngineerEntity.getStructEngineerId(), structuralEngineerEntity.getSurname(), structuralEngineerEntity.getName(),
+                structuralEngineerEntity.getTelephoneNumber(), structuralEngineerEntity.getEmailAddress(), structuralEngineerEntity.getPhysicalAddress());
 
     }
 
-    private StructuralEngineerEntity getStructEngineerEntityFromStructEngineerDTO(StructuralEngineerDTO structEngineerDTO) {
-        return new StructuralEngineerEntity(structEngineerDTO.getStructEngineerId(), structEngineerDTO.getSurname(),
-                structEngineerDTO.getName(), structEngineerDTO.getTelephoneNumber(), structEngineerDTO.getEmailAddress(), structEngineerDTO.getPhysicalAddress());
+    private StructuralEngineerEntity getStructuralEngineerEntityFromStructuralEngineerDTO(StructuralEngineerDTO structuralEngineerDTO) {
+        return new StructuralEngineerEntity(structuralEngineerDTO.getStructEngineerId(), structuralEngineerDTO.getSurname(),
+                structuralEngineerDTO.getName(), structuralEngineerDTO.getTelephoneNumber(), structuralEngineerDTO.getEmailAddress(), structuralEngineerDTO.getPhysicalAddress());
     }
 
 }

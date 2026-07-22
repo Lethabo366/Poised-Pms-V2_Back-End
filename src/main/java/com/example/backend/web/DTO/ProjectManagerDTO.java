@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProjectManagerDTO {
-    private Integer projManagerId;
+    private Integer projectManagerId;
     private String surname;
     private String name;
     private String telephoneNumber;

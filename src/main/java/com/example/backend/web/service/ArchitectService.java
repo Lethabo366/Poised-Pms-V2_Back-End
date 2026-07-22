@@ -21,7 +21,7 @@ public class ArchitectService {
     public List<ArchitectDTO> getAllArchitects() {
         List<ArchitectEntity> entities = this.architectRepository.findAll();
         List<ArchitectDTO> architectDTOS = new ArrayList<>(entities.size());
-        entities.forEach(e -> architectDTOS.add(getArchitectDTOFromEntity(e)));
+        entities.forEach(entity -> architectDTOS.add(getArchitectDTOFromEntity(entity)));
         return architectDTOS;
     }
 
@@ -54,6 +54,7 @@ public class ArchitectService {
     public void deleteArchitectById(int id) {
         this.architectRepository.deleteById(id);
     }
+
 
     private ArchitectDTO getArchitectDTOFromEntity(ArchitectEntity architectEntity) {
         return new ArchitectDTO(architectEntity.getArchitectId(), architectEntity.getSurname(), architectEntity.getName(),

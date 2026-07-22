@@ -21,7 +21,7 @@ public class ContractorService {
     public List<ContractorDTO> getAllContractors() {
         List<ContractorEntity> entities = this.contractorRepository.findAll();
         List<ContractorDTO> contractorDTOS = new ArrayList<>(entities.size());
-        entities.forEach(e -> contractorDTOS.add(getContractorDTOFromEntity(e)));
+        entities.forEach(entity -> contractorDTOS.add(getContractorDTOFromEntity(entity)));
         return contractorDTOS;
     }
 

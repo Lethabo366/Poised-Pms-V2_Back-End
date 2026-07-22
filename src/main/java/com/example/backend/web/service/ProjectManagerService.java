@@ -12,56 +12,56 @@ import java.util.Optional;
 @Service
 public class ProjectManagerService {
 
-    private final ProjectManagerRepository projManagerRepository;
+    private final ProjectManagerRepository projectManagerRepository;
 
-    public ProjectManagerService(ProjectManagerRepository projManagerRepository){
-        this.projManagerRepository =projManagerRepository;
+    public ProjectManagerService(ProjectManagerRepository projectManagerRepository){
+        this.projectManagerRepository = projectManagerRepository;
     }
 
     public List<ProjectManagerDTO> getAllProjManagers(){
-        List<ProjectManagerEntity> entities = this.projManagerRepository.findAll();
-        List<ProjectManagerDTO> projManagerDTOS = new ArrayList<>(entities.size());
-        entities.forEach(e -> projManagerDTOS.add(getProjManagerDTOFromEntity(e)));
-        return projManagerDTOS;
+        List<ProjectManagerEntity> entities = this.projectManagerRepository.findAll();
+        List<ProjectManagerDTO> projectManagerDTOS = new ArrayList<>(entities.size());
+        entities.forEach(e -> projectManagerDTOS.add(getProjectManagerDTOFromEntity(e)));
+        return projectManagerDTOS;
     }
 
-    public ProjectManagerDTO getProjManagerById(int id){
-       ProjectManagerEntity entity = this.projManagerRepository.findById(id).orElseThrow(() -> new RuntimeException("Project Manager Not Found"));
+    public ProjectManagerDTO getProjectManagerById(int id){
+       ProjectManagerEntity entity = this.projectManagerRepository.findById(id).orElseThrow(() -> new RuntimeException("Project Manager Not Found"));
 
-           return this.getProjManagerDTOFromEntity(entity);
+           return this.getProjectManagerDTOFromEntity(entity);
        }
 
 
-    public ProjectManagerDTO addProjManager(ProjectManagerDTO projManagerDTO){
-        ProjectManagerEntity entity = this.getProjManagerEntityFromProjManagerDTO(projManagerDTO);
-        entity = this.projManagerRepository.save(entity);
-        return this.getProjManagerDTOFromEntity(entity);
+    public ProjectManagerDTO addProjectManager(ProjectManagerDTO projManagerDTO){
+        ProjectManagerEntity entity = this.getProjectManagerEntityFromProjectManagerDTO(projManagerDTO);
+        entity = this.projectManagerRepository.save(entity);
+        return this.getProjectManagerDTOFromEntity(entity);
     }
 
-    public ProjectManagerDTO updateProjManager(ProjectManagerDTO projManagerDTO){
-        Optional<ProjectManagerEntity> projectManager = this.projManagerRepository.findById(projManagerDTO.getProjManagerId());
+    public ProjectManagerDTO updateProjectManager(ProjectManagerDTO projManagerDTO){
+        Optional<ProjectManagerEntity> projectManager = this.projectManagerRepository.findById(projManagerDTO.getProjectManagerId());
         if(projectManager.isEmpty()){
             throw new RuntimeException("Project Manager Not Found!");
         }
-        ProjectManagerEntity entity = this.getProjManagerEntityFromProjManagerDTO(projManagerDTO);
-        entity = this.projManagerRepository.save(entity);
-        return this.getProjManagerDTOFromEntity(entity);
+        ProjectManagerEntity entity = this.getProjectManagerEntityFromProjectManagerDTO(projManagerDTO);
+        entity = this.projectManagerRepository.save(entity);
+        return this.getProjectManagerDTOFromEntity(entity);
     }
 
 
-    public void deleteProjManagerById(int id){
-        this.projManagerRepository.deleteById(id);
+    public void deleteProjectManagerById(int id){
+        this.projectManagerRepository.deleteById(id);
     }
 
-    private ProjectManagerDTO getProjManagerDTOFromEntity(ProjectManagerEntity projManagerEntity){
-        return new ProjectManagerDTO(projManagerEntity.getProjManagerId(),projManagerEntity.getSurname(),projManagerEntity.getName(),
-                projManagerEntity.getTelephoneNumber(),projManagerEntity.getEmailAddress(),projManagerEntity.getPhysicalAddress());
+    private ProjectManagerDTO getProjectManagerDTOFromEntity(ProjectManagerEntity projectManagerEntity){
+        return new ProjectManagerDTO(projectManagerEntity.getProjectManagerId(),projectManagerEntity.getSurname(),projectManagerEntity.getName(),
+                projectManagerEntity.getTelephoneNumber(),projectManagerEntity.getEmailAddress(),projectManagerEntity.getPhysicalAddress());
 
     }
 
-    private ProjectManagerEntity getProjManagerEntityFromProjManagerDTO(ProjectManagerDTO projManagerDTO){
-        return new ProjectManagerEntity(projManagerDTO.getProjManagerId(),projManagerDTO.getSurname(),
-                projManagerDTO.getName(),projManagerDTO.getTelephoneNumber(),projManagerDTO.getEmailAddress(),projManagerDTO.getPhysicalAddress() );
+    private ProjectManagerEntity getProjectManagerEntityFromProjectManagerDTO(ProjectManagerDTO projectManagerDTO){
+        return new ProjectManagerEntity(projectManagerDTO.getProjectManagerId(),projectManagerDTO.getSurname(),
+                projectManagerDTO.getName(),projectManagerDTO.getTelephoneNumber(),projectManagerDTO.getEmailAddress(),projectManagerDTO.getPhysicalAddress() );
     }
 
 }

@@ -9,40 +9,41 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/structEngineer")
+@CrossOrigin(origins = "http://localhost:5173")
 
 public class StructuralEngineerController {
 
-    private final StructuralEngineerService structEngineerService;
+    private final StructuralEngineerService structuralEngineerService;
 
-    public StructuralEngineerController(StructuralEngineerService structEngineerService) {
-        this.structEngineerService = structEngineerService;
+    public StructuralEngineerController(StructuralEngineerService structuralEngineerService) {
+        this.structuralEngineerService = structuralEngineerService;
     }
 
     @GetMapping
     public List<StructuralEngineerDTO> getAllStructEngineers() {
-        return this.structEngineerService.getAllStructEngineers();
+        return this.structuralEngineerService.getAllStructuralEngineers();
     }
 
     @GetMapping("/{id}")
     public StructuralEngineerDTO getStructEngineer(@PathVariable(name="id") int id){
 
-        return this.structEngineerService.getStructEngineerById(id);
+        return this.structuralEngineerService.getStructuralEngineerById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public StructuralEngineerDTO addStructEngineer(@RequestBody StructuralEngineerDTO structEngineerDTO){
-        return this.structEngineerService.addStructEngineer(structEngineerDTO);
+    public StructuralEngineerDTO addStructEngineer(@RequestBody StructuralEngineerDTO structuralEngineerDTO){
+        return this.structuralEngineerService.addStructuralEngineer(structuralEngineerDTO);
     }
 
     @PutMapping
-    public StructuralEngineerDTO updateStructEngineer(@RequestBody StructuralEngineerDTO structEngineerDTO){
-        return this.structEngineerService.updateStructEngineer(structEngineerDTO);
+    public StructuralEngineerDTO updateStructEngineer(@RequestBody StructuralEngineerDTO structuralEngineerDTO){
+        return this.structuralEngineerService.updateStructuralEngineer(structuralEngineerDTO);
     }
 
     @DeleteMapping("/{id}")
     public void deleteStructEngineer(@PathVariable(name="id") int id){
-        this.structEngineerService.deleteStructEngineerById(id);
+        this.structuralEngineerService.deleteStructuralEngineerById(id);
     }
 
 }

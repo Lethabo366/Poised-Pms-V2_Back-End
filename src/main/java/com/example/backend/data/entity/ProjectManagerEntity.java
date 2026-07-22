@@ -14,7 +14,7 @@ public class ProjectManagerEntity {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="Proj_Manager_id")
-    private Integer projManagerId;
+    private Integer projectManagerId;
 
     @Column(name="Surname")
     private String surname;

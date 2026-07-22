@@ -8,41 +8,43 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/projManager")
+@RequestMapping("/projectManager")
+
+@CrossOrigin(origins = "http://localhost:5173")
 
 public class ProjectManagerController {
 
-    private final ProjectManagerService projManagerService;
+    private final ProjectManagerService projectManagerService;
 
-    public ProjectManagerController(ProjectManagerService projManagerService) {
-        this.projManagerService = projManagerService;
+    public ProjectManagerController(ProjectManagerService projectManagerService) {
+        this.projectManagerService = projectManagerService;
     }
 
     @GetMapping
     public List<ProjectManagerDTO> getAllProjManagers() {
-        return this.projManagerService.getAllProjManagers();
+        return this.projectManagerService.getAllProjManagers();
     }
 
     @GetMapping("/{id}")
     public ProjectManagerDTO getProjManager(@PathVariable(name="id") int id){
 
-        return this.projManagerService.getProjManagerById(id);
+        return this.projectManagerService.getProjectManagerById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ProjectManagerDTO addProjManager(@RequestBody ProjectManagerDTO projManagerDTO){
-        return this.projManagerService.addProjManager(projManagerDTO);
+        return this.projectManagerService.addProjectManager(projManagerDTO);
     }
 
     @PutMapping
     public ProjectManagerDTO updateCustomer(@RequestBody ProjectManagerDTO projManagerDTO){
-        return this.projManagerService.updateProjManager(projManagerDTO);
+        return this.projectManagerService.updateProjectManager(projManagerDTO);
     }
 
     @DeleteMapping("/{id}")
     public void deleteProjManager(@PathVariable(name="id") int id){
-        this.projManagerService.deleteProjManagerById(id);
+        this.projectManagerService.deleteProjectManagerById(id);
     }
 
 }
