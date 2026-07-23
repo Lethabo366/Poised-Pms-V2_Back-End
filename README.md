@@ -214,9 +214,4 @@ This project demonstrates knowledge of:
 
 GitHub: https://github.com/Lethabo366
 
----
-
-## License
-
-This project is intended for educational and portfolio purposes.
 
